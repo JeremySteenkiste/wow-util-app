@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/heroku-test-ng-app'),
+      dir: require('path').join(__dirname, './coverage/wow-util-app'),
       subdir: '.',
       reporters: [
         { type: 'html' },

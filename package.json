@@ -1,5 +1,5 @@
 {
-  "name": "heroku-test-ng-app",
+  "name": "wow-util-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -12,7 +12,7 @@
   },
   "engines": {
     "node": "14.16.1",
-    "npm": "6.14.12"
+    "npm": "7.11.1"
   },
   "private": true,
   "dependencies": {
