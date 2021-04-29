@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonnageService } from 'src/app/services/personnage.service';
+import { Store } from '@ngxs/store';
+import { AppStateActions } from 'src/app/state/app.actions';
 
 @Component({
   selector: 'app-accueil-page',
@@ -8,16 +9,14 @@ import { PersonnageService } from 'src/app/services/personnage.service';
 })
 export class AccueilPageComponent implements OnInit {
   searchInput: string = '';
-  constructor(private personnageService: PersonnageService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
   //TODO: Sélection du serveur de jeu
   onSearch() {
-    this.personnageService
-      .searchPersonnage(this.searchInput, 'hyjal')
-      .subscribe((result) => {
-        console.log(result);
-      });
+    this.store.dispatch(
+      new AppStateActions.SearchAction(this.searchInput, 'hyjal')
+    );
   }
 }
