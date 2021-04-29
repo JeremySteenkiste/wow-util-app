@@ -13,11 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { environment } from 'src/environments/environment';
 import { AppState } from './state/app.state';
 import { CarateristiqueComponent } from './components/carateristique/carateristique.component';
 
@@ -26,6 +25,7 @@ const materialImports = [
   MatToolbarModule,
   MatInputModule,
   MatIconModule,
+  MatSnackBarModule,
 ];
 @NgModule({
   declarations: [
