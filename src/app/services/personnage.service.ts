@@ -45,4 +45,19 @@ export class PersonnageService {
         })
       );
   }
+  /**
+   * Appel l'API Bnet pour récuperer le stuff du perosnnage ciblé
+   * @param url url du stuff de la personne
+   * @returns
+   */
+  getEquipement(url: string): Observable<any> {
+    return this.httpService
+      .get(url, { params: { access_token: BNET_TOKEN } })
+      .pipe(
+        catchError((error) => {
+          this.snackBar.open('Erreur lors de la récupération de lequipement');
+          return of(undefined);
+        })
+      );
+  }
 }
