@@ -60,4 +60,24 @@ export class PersonnageService {
         })
       );
   }
+
+  getMediaItem(id: string): Observable<any> {
+    let url: string = BNET_URL + 'data/wow/media/item/' + id;
+    return this.httpService
+      .get(url, {
+        params: {
+          namespace: 'static-eu',
+          locale: 'fr_FR',
+          access_token: BNET_TOKEN,
+        },
+      })
+      .pipe(
+        catchError((error) => {
+          this.snackBar.open(
+            'Erreur lors de la récupération de limage de litem'
+          );
+          return of(undefined);
+        })
+      );
+  }
 }

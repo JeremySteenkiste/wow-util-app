@@ -1,6 +1,7 @@
 export interface IEquipement {
   id: string;
   nom: string;
+  imageUrl?: string;
 }
 export interface IStuff {
   tete?: IEquipement;
