@@ -29,17 +29,21 @@ export class AppState {
       .pipe(
         map((result) => {
           console.log(result);
-          ctx.patchState({
-            caracteristique: {
-              pseudo: result.name,
-              classe: result.character_class.name,
-              specialisation: result.active_spec.name,
-              faction: result.faction.name,
-              ilevel: result.equipped_item_level,
-              niveau: result.level,
-              race: result.race.name,
-            },
-          });
+          if (result) {
+            ctx.patchState({
+              caracteristique: {
+                pseudo: result.name,
+                classe: result.character_class.name,
+                specialisation: result.active_spec.name,
+                faction: result.faction.name,
+                ilevel: result.equipped_item_level,
+                niveau: result.level,
+                race: result.race.name,
+              },
+            });
+          } else {
+            ctx.patchState({ caracteristique: undefined });
+          }
         })
       );
   }
