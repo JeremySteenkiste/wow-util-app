@@ -1,3 +1,4 @@
+import { IStuff } from './../../models/equipement.model';
 import { AppState } from './../../state/app.state';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
@@ -13,6 +14,7 @@ export class CarateristiqueComponent implements OnInit {
   @Select(AppState.caracteristique) caract$:
     | Observable<ICaracteristique>
     | undefined;
+  @Select(AppState.stuff) stuff$: Observable<IStuff> | undefined;
   constructor() {}
 
   ngOnInit(): void {}

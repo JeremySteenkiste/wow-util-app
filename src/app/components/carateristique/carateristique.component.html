@@ -6,3 +6,101 @@
   {{ caract.faction }}
   {{ caract.classe }}
 </div>
+<div *ngIf="stuff$ | async as stuff">
+  <div *ngIf="stuff.tete">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.tete.id }}">
+      <img src="{{ stuff.tete.imageUrl }}" alt="{{ stuff.tete.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.cou">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.cou.id }}">
+      <img src="{{ stuff.cou.imageUrl }}" alt="{{ stuff.cou.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.epaules">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.epaules.id }}">
+      <img src="{{ stuff.epaules.imageUrl }}" alt="{{ stuff.epaules.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.dos">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.dos.id }}">
+      <img src="{{ stuff.dos.imageUrl }}" alt="{{ stuff.dos.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.torse">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.torse.id }}">
+      <img src="{{ stuff.torse.imageUrl }}" alt="{{ stuff.torse.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.chemise">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.chemise.id }}">
+      <img src="{{ stuff.chemise.imageUrl }}" alt="{{ stuff.chemise.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.tabard">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.tabard.id }}">
+      <img src="{{ stuff.tabard.imageUrl }}" alt="{{ stuff.tabard.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.brassard">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.brassard.id }}">
+      <img src="{{ stuff.brassard.imageUrl }}" alt="{{ stuff.brassard.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.mainDroite">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.mainDroite.id }}">
+      <img
+        src="{{ stuff.mainDroite.imageUrl }}"
+        alt="{{ stuff.mainDroite.nom }}"
+      />
+    </a>
+  </div>
+  <div *ngIf="stuff.mainGauche">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.mainGauche.id }}">
+      <img
+        src="{{ stuff.mainGauche.imageUrl }}"
+        alt="{{ stuff.mainGauche.nom }}"
+      />
+    </a>
+  </div>
+  <div *ngIf="stuff.mains">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.mains.id }}">
+      <img src="{{ stuff.mains.imageUrl }}" alt="{{ stuff.mains.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.ceinture">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.ceinture.id }}">
+      <img src="{{ stuff.ceinture.imageUrl }}" alt="{{ stuff.ceinture.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.jambes">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.jambes.id }}">
+      <img src="{{ stuff.jambes.imageUrl }}" alt="{{ stuff.jambes.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.pieds">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.pieds.id }}">
+      <img src="{{ stuff.pieds.imageUrl }}" alt="{{ stuff.pieds.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.bague1">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.bague1.id }}">
+      <img src="{{ stuff.bague1.imageUrl }}" alt="{{ stuff.bague1.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.bague2">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.bague2.id }}">
+      <img src="{{ stuff.bague2.imageUrl }}" alt="{{ stuff.bague2.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.bijou1">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.bijou1.id }}">
+      <img src="{{ stuff.bijou1.imageUrl }}" alt="{{ stuff.bijou1.nom }}" />
+    </a>
+  </div>
+  <div *ngIf="stuff.bijou2">
+    <a href="{{ 'https://fr.wowhead.com/item=' + stuff.bijou2.id }}">
+      <img src="{{ stuff.bijou2.imageUrl }}" alt="{{ stuff.bijou2.nom }}" />
+    </a>
+  </div>
+</div>
