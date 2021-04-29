@@ -1,3 +1,4 @@
+import { StateModel } from './models/state.model';
 import { AppRoutingModule } from './app-routing-module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { environment } from 'src/environments/environment';
+import { AppState } from './state/app.state';
+import { CarateristiqueComponent } from './components/carateristique/carateristique.component';
 
 const materialImports = [
   MatButtonModule,
@@ -22,8 +28,14 @@ const materialImports = [
   MatIconModule,
 ];
 @NgModule({
-  declarations: [AppComponent, AccueilPageComponent, OptimisationPageComponent],
+  declarations: [
+    AppComponent,
+    AccueilPageComponent,
+    OptimisationPageComponent,
+    CarateristiqueComponent,
+  ],
   imports: [
+    NgxsModule.forRoot([AppState]),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
