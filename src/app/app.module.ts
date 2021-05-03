@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { AppState } from './state/app.state';
 import { CarateristiqueComponent } from './components/carateristique/carateristique.component';
+import { HdvPageComponent } from './pages/hdv-page/hdv-page.component';
 
 const materialImports = [
   MatButtonModule,
@@ -33,6 +34,7 @@ const materialImports = [
     AccueilPageComponent,
     OptimisationPageComponent,
     CarateristiqueComponent,
+    HdvPageComponent,
   ],
   imports: [
     NgxsModule.forRoot([AppState]),
