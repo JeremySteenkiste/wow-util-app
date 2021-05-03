@@ -1,21 +1,31 @@
+import { BnetAuthService } from './../services/bnet-auth.service';
 import { IStuff } from './../models/equipement.model';
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, Select, Selector, State, StateContext } from '@ngxs/store';
 import { StateModel } from '../models/state.model';
 import { PersonnageService } from '../services/personnage.service';
 import { AppStateActions } from './app.actions';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { forkJoin, of } from 'rxjs';
 @State<StateModel>({
   name: 'AppState',
   defaults: {
+    bnet_token: '',
     caracteristique: undefined,
     sutff: undefined,
   },
 })
 @Injectable()
 export class AppState {
-  constructor(private persoService: PersonnageService) {}
+  constructor(
+    private persoService: PersonnageService,
+    private bnetAuth: BnetAuthService
+  ) {}
+
+  @Selector()
+  static bnetToken(state: StateModel) {
+    return state.bnet_token;
+  }
 
   @Selector()
   static caracteristique(state: StateModel) {
@@ -26,11 +36,21 @@ export class AppState {
     return state.sutff;
   }
 
+  @Action(AppStateActions.InitAction)
+  init(ctx: StateContext<StateModel>) {
+    this.bnetAuth.getTokenBnet().subscribe((token: string) => {
+      ctx.patchState({
+        bnet_token: token,
+      });
+    });
+  }
+
   @Action(AppStateActions.SearchAction)
   search(ctx: StateContext<StateModel>, action: AppStateActions.SearchAction) {
+    let token = ctx.getState().bnet_token;
     //Appel de la ressource pour récupérer le personnage
     return this.persoService
-      .searchPersonnage(action.nomPerso, action.serveur)
+      .searchPersonnage(action.nomPerso, action.serveur, token)
       .pipe(
         switchMap((character) => {
           if (character) {
@@ -47,13 +67,13 @@ export class AppState {
             });
 
             return this.persoService
-              .getEquipement(character.equipment.href)
+              .getEquipement(character.equipment.href, token)
               .pipe(
                 switchMap((equipements) => {
                   let obs$: any[] = [];
                   equipements.equipped_items.forEach((equipement: any) => {
                     obs$.push(
-                      this.persoService.getMediaItem(equipement.item.id)
+                      this.persoService.getMediaItem(equipement.item.id, token)
                     );
                   });
                   return forkJoin(obs$).pipe(
@@ -63,14 +83,6 @@ export class AppState {
                   );
                 })
               );
-            //Appel la ressource pour récupérer l'équipement
-            // return forkJoin([
-            //   this.persoService.getEquipement(character.equipment.href),
-            // ]).pipe(
-            //   map((data: any[]) => {
-            //     this.mappingEquipement(ctx, data[0]);
-            //   })
-            // );
           } else {
             ctx.patchState({ caracteristique: undefined });
             return of(undefined);
@@ -315,4 +327,9 @@ export class AppState {
       sutff: stuffTMP,
     });
   }
+
+  /**
+   * credentilas sous string
+   * btoa(credentials)
+   */
 }
