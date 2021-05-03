@@ -1,1 +1,9 @@
-<p>hdv-page works!</p>
+<div class="search-item-container">
+  <label>Id de l'item recherché : </label>
+  <input
+    matInput
+    [(ngModel)]="itemSearchInput"
+    (keydown.enter)="onSearchItem()"
+    name="itemSearchInput"
+  />
+</div>
