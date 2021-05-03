@@ -17,7 +17,11 @@ export class PersonnageService {
    * @param serveur Serveur associé au personnage rechercher
    * @returns
    */
-  searchPersonnage(nom: string, serveur: string): Observable<any> {
+  searchPersonnage(
+    nom: string,
+    serveur: string,
+    token: string
+  ): Observable<any> {
     console.log('Search Personnage : ', nom, serveur);
     this.snackBar.dismiss();
 
@@ -33,7 +37,7 @@ export class PersonnageService {
         params: {
           namespace: 'profile-eu',
           locale: 'fr_FR',
-          access_token: BNET_TOKEN,
+          access_token: token,
         },
       })
       .pipe(
@@ -50,25 +54,23 @@ export class PersonnageService {
    * @param url url du stuff de la personne
    * @returns
    */
-  getEquipement(url: string): Observable<any> {
-    return this.httpService
-      .get(url, { params: { access_token: BNET_TOKEN } })
-      .pipe(
-        catchError((error) => {
-          this.snackBar.open('Erreur lors de la récupération de lequipement');
-          return of(undefined);
-        })
-      );
+  getEquipement(url: string, token: string): Observable<any> {
+    return this.httpService.get(url, { params: { access_token: token } }).pipe(
+      catchError((error) => {
+        this.snackBar.open('Erreur lors de la récupération de lequipement');
+        return of(undefined);
+      })
+    );
   }
 
-  getMediaItem(id: string): Observable<any> {
+  getMediaItem(id: string, token: string): Observable<any> {
     let url: string = BNET_URL + 'data/wow/media/item/' + id;
     return this.httpService
       .get(url, {
         params: {
           namespace: 'static-eu',
           locale: 'fr_FR',
-          access_token: BNET_TOKEN,
+          access_token: token,
         },
       })
       .pipe(
