@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-hdv-page',
@@ -9,11 +10,17 @@ export class HdvPageComponent implements OnInit {
   // ID Fatalée : 169701
   itemSearchInput: string = '169701';
 
-  constructor() {}
+  data: any;
+
+  constructor(private readonly firebaseService: FirebaseService) {}
 
   ngOnInit(): void {}
 
   onSearchItem() {
-    console.log("ID de l'item recherché : ", this.itemSearchInput);
+    this.firebaseService
+      .getItemFirebase(this.itemSearchInput)
+      .on('value', (dataResult) => {
+        this.data = dataResult.val();
+      });
   }
 }

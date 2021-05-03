@@ -7,3 +7,8 @@
     name="itemSearchInput"
   />
 </div>
+<div *ngIf="data | as; result">
+  <ul>
+    <li *ngfor="let dataItem; in: data">{{ data }}</li>
+  </ul>
+</div>

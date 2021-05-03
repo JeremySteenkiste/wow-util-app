@@ -20,6 +20,10 @@ import { NgxsModule } from '@ngxs/store';
 import { AppState } from './state/app.state';
 import { CarateristiqueComponent } from './components/carateristique/carateristique.component';
 import { HdvPageComponent } from './pages/hdv-page/hdv-page.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 const materialImports = [
   MatButtonModule,
@@ -39,6 +43,9 @@ const materialImports = [
   imports: [
     NgxsModule.forRoot([AppState]),
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFireDatabaseModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,

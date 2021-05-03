@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "wow-util-db": {
+      "hosting": {
+        "wow-util-app": [
+          "wow-util-db"
+        ]
+      }
+    }
+  }
+}
