@@ -12,7 +12,7 @@ export class HdvPageComponent implements OnInit {
   // ID Fatalée : 169701
   itemSearchInput: string = '169701';
 
-  data: Observable<any> | undefined;
+  data: any;
 
   constructor(private readonly firebaseService: FirebaseService) {}
 
@@ -26,11 +26,16 @@ export class HdvPageComponent implements OnInit {
     //Récupération de toutes les ventes de l'item
     this.firebaseService
       .getItemFirebase(this.itemSearchInput)
-      .subscribe((dataResult: any[]) => {
-        let venteDuJour = dataResult.filter((dataItem: any) => {
-          return dataItem.key === today;
+      .subscribe((result) => {
+        let test = result[0].payload.val() as object;
+        let keys = Object.keys(test)[0];
+        let data: any = test[keys as keyof typeof test];
+        let ventes: any[] = data.ventes;
+        ventes.sort((a, b) => {
+          return a.prix_unite - b.prix_unite;
         });
-        console.log(venteDuJour[0].payload.val());
+        this.data = ventes;
+        console.log(data.ventes);
       });
   }
 }

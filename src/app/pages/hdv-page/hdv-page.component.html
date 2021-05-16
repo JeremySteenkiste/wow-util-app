@@ -8,8 +8,10 @@
   />
   <button (click)="onSearchItem()">Rechercher</button>
 </div>
-<!-- <div *ngIf="data | as; result">
+<div>
   <ul>
-    <li *ngfor="let dataItem; in: data">{{ data }}</li>
+    <li *ngFor="let item of data">
+      Prix : {{ item.prix_unite }} / Quantité : {{ item.quantite }}
+    </li>
   </ul>
-</div> -->
+</div>
