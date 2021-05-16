@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
-  db;
-  constructor(private firebseDataService: AngularFireDatabase) {
-    this.db = this.firebseDataService.database;
-  }
+  constructor(private firebseDataService: AngularFireDatabase) {}
 
-  getItemFirebase(idItem: string) {
-    return this.db.ref('hdv').child(idItem);
+  getItemFirebase(idItem: string): Observable<any> {
+    return this.firebseDataService.list('/hdv/' + idItem).snapshotChanges();
   }
 }

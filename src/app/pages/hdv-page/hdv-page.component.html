@@ -6,9 +6,10 @@
     (keydown.enter)="onSearchItem()"
     name="itemSearchInput"
   />
+  <button (click)="onSearchItem()">Rechercher</button>
 </div>
-<div *ngIf="data | as; result">
+<!-- <div *ngIf="data | as; result">
   <ul>
     <li *ngfor="let dataItem; in: data">{{ data }}</li>
   </ul>
-</div>
+</div> -->
