@@ -1,5 +1,5 @@
 export const BNET_URL = 'https://eu.api.blizzard.com/';
-export const BNET_TOKEN = 'USkVg6S1IadjsekF39K2X8blIex8I8taQ2';
+export const BNET_TOKEN = 'USPfUOkVbOZt73Vuk1C6nK4eo0ZB3vcVAo';
 
 export const BNET_CONFIG = {
   namespace: 'dynamic-eu',

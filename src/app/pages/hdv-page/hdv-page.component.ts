@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 import * as moment from 'moment';
-import { FirebaseService } from 'src/app/services/firebase.service';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Hdv } from 'src/app/models/hdv.model';
+import { HdvStateActions } from 'src/app/state/hdv-state/hdv.action';
+import { HdvState } from 'src/app/state/hdv-state/hdv.state';
 
 @Component({
   selector: 'app-hdv-page',
@@ -12,30 +16,26 @@ export class HdvPageComponent implements OnInit {
   // ID Fatalée : 169701
   itemSearchInput: string = '169701';
 
-  data: any;
+  @Select(HdvState.ventes) ventes$:
+    | Observable<Map<string, Hdv.IJour>>
+    | undefined;
 
-  constructor(private readonly firebaseService: FirebaseService) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit(): void {}
 
   onSearchItem() {
-    console.log('Search item ' + this.itemSearchInput);
-
-    let today = moment().format('DD-MM-YYYY').toString();
-    console.log(today);
-    //Récupération de toutes les ventes de l'item
-    this.firebaseService
-      .getItemFirebase(this.itemSearchInput)
-      .subscribe((result) => {
-        let test = result[0].payload.val() as object;
-        let keys = Object.keys(test)[0];
-        let data: any = test[keys as keyof typeof test];
-        let ventes: any[] = data.ventes;
-        ventes.sort((a, b) => {
-          return a.prix_unite - b.prix_unite;
-        });
-        this.data = ventes;
-        console.log(data.ventes);
-      });
+    this.store
+      .dispatch(new HdvStateActions.SearchItemAction(this.itemSearchInput))
+      .pipe(
+        catchError((objectError) => {
+          console.log(
+            "Erreur lors de la récupération des données de l'item",
+            objectError
+          );
+          return of(undefined);
+        })
+      )
+      .subscribe();
   }
 }

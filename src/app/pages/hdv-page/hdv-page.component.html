@@ -8,10 +8,18 @@
   />
   <button (click)="onSearchItem()">Rechercher</button>
 </div>
-<div>
-  <ul>
-    <li *ngFor="let item of data">
-      Prix : {{ item.prix_unite }} / Quantité : {{ item.quantite }}
-    </li>
-  </ul>
+<div *ngIf="ventes$ | async as ventes">
+  <div>
+    <ul *ngFor="let vente of ventes | keyvalue">
+      <li>
+        <span>{{ vente.key }}</span>
+        <ul *ngFor="let heure of vente.value.heures | keyvalue">
+          <li>{{ heure.key }}</li>
+          <ul *ngFor="let vente of heure.value.ventes">
+            <li>Prix/Unité: {{ vente.prix_unite }}</li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>

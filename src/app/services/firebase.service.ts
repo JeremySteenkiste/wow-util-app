@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import { IFirebaseResult } from '../models/firebase.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,11 @@ import { Observable } from 'rxjs';
 export class FirebaseService {
   constructor(private firebseDataService: AngularFireDatabase) {}
 
-  getItemFirebase(idItem: string): Observable<any> {
-    return this.firebseDataService.list('/hdv/' + idItem).snapshotChanges();
+  getItemFirebase(
+    idItem: string
+  ): Observable<SnapshotAction<IFirebaseResult[]>[]> {
+    return this.firebseDataService
+      .list<IFirebaseResult[]>('/hdv/' + idItem)
+      .snapshotChanges();
   }
 }

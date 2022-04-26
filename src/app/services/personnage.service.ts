@@ -27,7 +27,7 @@ export class PersonnageService {
 
     let url: string =
       BNET_URL +
-      '/profile/wow/character/' +
+      'profile/wow/character/' +
       serveur.toLowerCase() +
       '/' +
       nom.toLowerCase();

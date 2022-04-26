@@ -1,6 +1,6 @@
-import { StateModel } from './models/state.model';
 import { AppRoutingModule } from './app-routing-module';
 import { NgModule } from '@angular/core';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { HdvState } from './state/hdv-state/hdv.state';
 
 const materialImports = [
   MatButtonModule,
@@ -41,7 +42,8 @@ const materialImports = [
     HdvPageComponent,
   ],
   imports: [
-    NgxsModule.forRoot([AppState]),
+    NgxsModule.forRoot([AppState, HdvState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
